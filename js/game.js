@@ -20,30 +20,6 @@ $(function() {
   var canvas = document.getElementById('game');
   var context = canvas.getContext('2d');
   var tank = new Tank(canvas.width/2,canvas.height/2);
-  var Bullet = function(x,y, direction) {
-    this.x = x;
-    this.y = y;
-    this.vel = 2;
-    this.direction = direction;
-  }
-
-  Bullet.prototype.move = function() {
-    switch(this.direction) {
-      case "up":
-        this.y--;
-        break;
-      case "right":
-        this.x++;
-        break;
-      case "down":
-        this.y++;
-        break;
-      case "left":
-        this.x--;
-      default:
-    }
-  }
-
   var bullets = [];
 
   $(document).keydown(function(e) {
