@@ -6,5 +6,5 @@ var Eagle = function(x,y) {
   this.y = y;
   this.sprite = new Image();
   this.sprite.src = "img/NES_Battle_Citty_Eagle.gif";
-  this.isThere = true;
+  this.isShow = true;
  }
