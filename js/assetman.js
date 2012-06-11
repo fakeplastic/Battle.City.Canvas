@@ -42,3 +42,7 @@ AssetMan.prototype.dnAll = function (callback) {
           
 	}
 }
+
+AssetMan.prototype.getAsset = Function() {
+	return this.cache[path];
+}
