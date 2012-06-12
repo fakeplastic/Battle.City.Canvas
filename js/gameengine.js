@@ -22,13 +22,15 @@ Timer.prototype.tick = function() {
 	var timeCurrent = Date.now();
 	var timeDelta = (timeCurrent - this.lastTime) / 1000;
 	this.lastTime = timeCurrent;
-	var gameTime +=  
+	var gameDelta = Math.min(timeDelta, this.maxTime);
+	this.gameTime +=  gameDelta;
 }
 
 function GameEngine () {
 	this.entities = [];
 	this.ctx = null;
 	this.timer = new Timer();
+	
 	
 
 	
