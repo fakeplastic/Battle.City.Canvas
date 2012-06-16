@@ -17,9 +17,12 @@ window.requestAnimFrame = (function(){
 function GameEngine () {
 	this.entities = [];
 	this.ctx = null;
+	this.surfaceWidth = this.ctx.canvas.width;
+    this.surfaceHeight = this.ctx.canvas.height;
 }
 
 GameEngine.prototype.draw = function(callback) {
+	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight)
 	
 }
 
@@ -32,5 +35,9 @@ GameEngine.prototype.loop = function () {
 	this.deltaTime = now - this.lastUpdateTimestamp;
 	this.update();
 	this.draw();
-	
-	
+	this.lastUpdateTimestamp = now;
+	var GE = this;
+	requestAnimFrame(gameLoop, GE.ctx.canvas);
+}
+
+GameEngine.loop();
