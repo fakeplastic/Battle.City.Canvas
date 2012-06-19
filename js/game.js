@@ -20,8 +20,33 @@ $(function() {
   var canvas = document.getElementById('game');
   var context = canvas.getContext('2d');
   var tank = new Tank(canvas.width/2,canvas.height/2);
+/*    var Bullet = function(x,y, direction) {
+    this.x = x;
+    this.y = y;
+    this.vel = 2;
+    this.direction = direction;
+  }
+  
+    Bullet.prototype.move = function() {
+    switch(this.direction) {
+      case "up":
+        this.y--;
+        break;
+      case "right":
+        this.x++;
+        break;
+      case "down":
+        this.y++;
+        break;
+      case "left":
+        this.x--;
+      default:
+    }
+  }
+
   var bullets = [];
 
+*/
   $(document).keydown(function(e) {
     if(e.keyCode == 38) {
       tank.moveUp();
@@ -35,7 +60,7 @@ $(function() {
     if(e.keyCode == 37) {
       tank.moveLeft();
     }
-    if(e.keyCode == 32) {
+    /*if(e.keyCode == 32) {
       var bullet = {};
       if(tank.direction == "up") {
         bullet = new Bullet(tank.x+tank.sprite.width/2, tank.y, tank.direction);
@@ -50,16 +75,16 @@ $(function() {
         bullet = new Bullet(tank.x+tank.sprite.width, tank.y+tank.sprite.height/2, tank.direction);
       }
       bullets.push(bullet);
-    }
+    }*/
   });
 
   function render() {
     context.clearRect(0,0,canvas.width,canvas.height);
     context.drawImage(tank.sprite, tank.x, tank.y);
-    for(var i = 0; i < bullets.length; i++ ) {
+    /*for(var i = 0; i < bullets.length; i++ ) {
       bullets[i].move();
       context.fillRect(bullets[i].x,bullets[i].y,2,2);
-    }
+    }*/
   }
 
   function animLoop() {
