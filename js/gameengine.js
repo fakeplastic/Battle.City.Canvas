@@ -23,7 +23,7 @@ function GameEngine () {
     this.surfaceHeight = null;
     this.tank = null;
     this.bird = null;
-    
+    this.playerbullets = [];
   }
 
 GameEngine.prototype.init = function (ctx) {
@@ -47,21 +47,26 @@ GameEngine.prototype.start = function() {
 GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 38) {
       console.log("up pressed");
-      tank.moveUp();
+      GEObj.tank.moveUp();
     }
     if(e.keyCode == 40) {
     	console.log("down pressed");
-      this.tank.moveDown();
+      GEObj.tank.moveDown();
     }
     if(e.keyCode == 39) {
     	console.log("right pressed");
-      this.tank.moveRight();
+      GEObj.tank.moveRight();
     }
     if(e.keyCode == 37) {
     	console.log("left pressed");
-      this.tank.moveLeft();
-	}}
-   
+      GEObj.tank.moveLeft();
+	}
+	}
+GameEngine.prototype.fkeypress = function(e) {
+	if(e.keyCode == 32) {
+      console.log("fire");
+      GEObj.tank.moveUp();
+	}   
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
@@ -73,6 +78,7 @@ GameEngine.prototype.draw = function () {
 GameEngine.prototype.update = function (){
 	console.log('updated');
 	document.body.addEventListener('keydown',this.fkeydown, false);
+	document.body.addEventListener('keypress',this.fkeypress, false);
 	};
 
 GameEngine.prototype.loop = function () {

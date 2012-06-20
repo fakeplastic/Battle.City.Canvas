@@ -20,7 +20,7 @@ $(function() {
   var canvas = document.getElementById('game');
   var context = canvas.getContext('2d');
   var tank = new Tank(canvas.width/2,canvas.height/2);
-/*    var Bullet = function(x,y, direction) {
+   var Bullet = function(x,y, direction) {
     this.x = x;
     this.y = y;
     this.vel = 2;
@@ -46,7 +46,6 @@ $(function() {
 
   var bullets = [];
 
-*/
   $(document).keydown(function(e) {
     if(e.keyCode == 38) {
       tank.moveUp();

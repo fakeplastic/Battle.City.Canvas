@@ -6,6 +6,7 @@
     this.y = y;
     this.vel = 2;
     this.direction = direction;
+    this.isRemoved = false;
   }
 
   Bullet.prototype.move = function() {
