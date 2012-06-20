@@ -22,6 +22,7 @@ function GameEngine () {
 	this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.tank = null;
+    this.bird = null;
     
   }
 
@@ -43,7 +44,23 @@ GameEngine.prototype.start = function() {
 	})();
 }
 
-
+GameEngine.prototype.fkeydown = function(e) {
+	if(e.keyCode == 38) {
+      console.log("up pressed");
+      tank.moveUp();
+    }
+    if(e.keyCode == 40) {
+    	console.log("down pressed");
+      this.tank.moveDown();
+    }
+    if(e.keyCode == 39) {
+    	console.log("right pressed");
+      this.tank.moveRight();
+    }
+    if(e.keyCode == 37) {
+    	console.log("left pressed");
+      this.tank.moveLeft();
+	}}
    
 
 GameEngine.prototype.draw = function () {
@@ -55,7 +72,8 @@ GameEngine.prototype.draw = function () {
 
 GameEngine.prototype.update = function (){
 	console.log('updated');
-}
+	document.body.addEventListener('keydown',this.fkeydown, false);
+	};
 
 GameEngine.prototype.loop = function () {
 	var now = Date.now();
@@ -68,4 +86,3 @@ GameEngine.prototype.loop = function () {
 var GEObj = new GameEngine()
 GEObj.init(ctx);
 GEObj.start();
-

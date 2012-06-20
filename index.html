@@ -3,9 +3,23 @@
 <html>
 <head>
   <title>Battle City Online</title>
+  <style type="text/css">
+  	canvas {
+    padding-left: 5;
+    padding-right: 5;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+div {margin:30px auto; width:640px; text-align:center;}
+#T {font-family:"Courier","Courier New";}
+  </style>
 </head>
 <body>
-  <canvas id="gamecanvas" width="640" height="480" style="background: black"></canvas>
+	<div>
+		<span id="T"><b>Fake Plastic Battle City</b></span>
+  <canvas id="gamecanvas" width="640" height="480" style="background: #E0E0E0"></canvas>
+  </div>
   <script type="text/javascript" src="js/tank.js"></script>
   <script type="text/javascript" src="js/Eagle.js"></script>
   <script type="text/javascript" src="js/gameengine.js"></script>
