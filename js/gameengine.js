@@ -65,20 +65,28 @@ GameEngine.prototype.fkeydown = function(e) {
 GameEngine.prototype.fkeypress = function(e) {
 	if(e.keyCode == 32) {
       console.log("fire");
-      GEObj.tank.moveUp();
+      var bullet = new Bullet(GEObj.tank.x,GEObj.tank.y,GEObj.tank.direction);
+      GEObj.playerbullets.push(bullet);
+	}
 	}   
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
 	this.ctx.save();
-	this.ctx.drawImage(this.tank.sprite,this.tank.x,this.tank.y);
+	this.ctx.drawImage(this.tank.sprite,this.tank.x-this.tank.sprite.width/2,this.tank.y-this.tank.sprite.height/2);
 	this.ctx.drawImage(this.bird.sprite,this.bird.x,this.bird.y);
+	for(var i = 0; i < this.playerbullets.length; i++) {
+		this.ctx.fillRect(this.playerbullets[i].x,this.playerbullets[i].y,2,2);
+	}
 }
 
 GameEngine.prototype.update = function (){
 	console.log('updated');
 	document.body.addEventListener('keydown',this.fkeydown, false);
 	document.body.addEventListener('keypress',this.fkeypress, false);
+	for(var i = 0; i < this.playerbullets.length; i++) {
+		this.playerbullets[i].move();
+	}
 	};
 
 GameEngine.prototype.loop = function () {
@@ -89,6 +97,6 @@ GameEngine.prototype.loop = function () {
 	this.lastUpdateTimestamp = now;
 }
 
-var GEObj = new GameEngine()
+var GEObj = new GameEngine();
 GEObj.init(ctx);
 GEObj.start();

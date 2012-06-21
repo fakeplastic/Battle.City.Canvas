@@ -59,7 +59,7 @@ $(function() {
     if(e.keyCode == 37) {
       tank.moveLeft();
     }
-    /*if(e.keyCode == 32) {
+    if(e.keyCode == 32) {
       var bullet = {};
       if(tank.direction == "up") {
         bullet = new Bullet(tank.x+tank.sprite.width/2, tank.y, tank.direction);
@@ -74,16 +74,16 @@ $(function() {
         bullet = new Bullet(tank.x+tank.sprite.width, tank.y+tank.sprite.height/2, tank.direction);
       }
       bullets.push(bullet);
-    }*/
+    }
   });
 
   function render() {
     context.clearRect(0,0,canvas.width,canvas.height);
     context.drawImage(tank.sprite, tank.x, tank.y);
-    /*for(var i = 0; i < bullets.length; i++ ) {
+    for(var i = 0; i < bullets.length; i++ ) {
       bullets[i].move();
       context.fillRect(bullets[i].x,bullets[i].y,2,2);
-    }*/
+    }
   }
 
   function animLoop() {

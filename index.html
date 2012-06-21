@@ -1,27 +1,48 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+"http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-  <title>Battle City Online</title>
-  <style type="text/css">
-  	canvas {
-    padding-left: 5;
-    padding-right: 5;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-div {margin:30px auto; width:640px; text-align:center;}
-#T {font-family:"Courier","Courier New";}
-  </style>
-</head>
-<body>
-	<div>
-		<span id="T"><b>Fake Plastic Battle City</b></span>
-  <canvas id="gamecanvas" width="640" height="480" style="background: #E0E0E0"></canvas>
-  </div>
-  <script type="text/javascript" src="js/tank.js"></script>
-  <script type="text/javascript" src="js/Eagle.js"></script>
-  <script type="text/javascript" src="js/gameengine.js"></script>
-</body>
+	<head>
+		<title>Battle City Online</title>
+		<style type="text/css">
+			body {
+				font-family: Segoe UI Light, Arial, Helvetica;
+				background-color: #000;
+				/*background-image: url(img/bg.jpg);
+				background-repeat: no-repeat;*/
+				margin: 0;
+			}
+			canvas {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			div {
+				margin: 30px auto;
+				width: 640px;
+				text-align: center;
+			}
+			#T {
+				font-family: "Lucida Console";
+				color: #FFFFFF;
+				text-shadow: 
+				0.1em 0.1em 0.1em #000,
+				0 -0.1em 3px #FE8811,
+				0 -0.1em 8px #E68A00,
+				0 -0.2em 12px #FFAD33,
+				0 -0.3em 16px #FFAD00,
+				0 -0.4em 20px #FFFF00,
+				0 -1em 16px #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<span id="T"><b><h1>FakePlastic Battle City</h1></b></span>
+			<canvas id="gamecanvas" width="640" height="480" style="background: #E0E0E0"></canvas>
+		</div>
+		<script type="text/javascript" src="js/tank.js"></script>
+		<script type="text/javascript" src="js/Eagle.js"></script>
+		<script type="text/javascript" src="js/Bullet.js"></script>
+		<script type="text/javascript" src="js/gameengine.js"></script>
+	</body>
 </html>
