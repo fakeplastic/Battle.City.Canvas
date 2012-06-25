@@ -35,6 +35,9 @@ GameEngine.prototype.init = function (ctx) {
 	this.surfaceHeight = this.ctx.canvas.height/2;
 	this.p1tank = new Tank(this.surfaceWidth/2,this.surfaceHeight/2);
 	this.bird = new Eagle(Math.random()*this.surfaceWidth,Math.random()*this.surfaceHeight);
+	
+	city.createLevel(level1);
+	
 
 }
 
@@ -79,6 +82,8 @@ GameEngine.prototype.fkeyup = function(e) {
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
+	for(var i = 0; i < city.cityEnt.length; i++) {
+		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);};
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
 	this.ctx.drawImage(this.bird.sprite,this.bird.x,this.bird.y);
 	for(var i = 0; i < this.p1bullets.length; i++) {
@@ -105,5 +110,6 @@ GameEngine.prototype.loop = function () {
 }
 
 var GEObj = new GameEngine();
+var city = new City();
 GEObj.init(ctx);
 GEObj.start();
