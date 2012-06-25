@@ -87,7 +87,11 @@ GameEngine.prototype.draw = function () {
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
 	this.ctx.drawImage(this.bird.sprite,this.bird.x,this.bird.y);
 	for(var i = 0; i < this.p1bullets.length; i++) {
+		this.ctx.fillStyle = "rgba(200, 45, 21, 0.3)";
+		this.ctx.fillRect(this.p1bullets[i].xt-1,this.p1bullets[i].yt-1,4,4);
+		this.ctx.fillStyle = "black";
 		this.ctx.fillRect(this.p1bullets[i].x,this.p1bullets[i].y,2,2);
+
 	}
 }
 

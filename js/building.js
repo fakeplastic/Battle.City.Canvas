@@ -26,10 +26,18 @@ City = function() {
 }
 
 City.prototype.createLevel = function(level) {
+	var BG = function (){
+		this.x = 0;
+		this.y = 0;
+		this.sprite = new Image();
+		this.sprite.src = "img/Asphalt_texture.JPG";
+		}
+	var BG1 = new BG();
+	this.cityEnt.push(BG1);
 	for (var i = 0; i < level.length; i++) {
 		for (var j = 0; j < level[i].length; j++) {
 			if (!level[i][j] == 0) {
-				var bldg = new Building(i * 40, j * 40, level[i][j]);
+				var bldg = new Building(j * 40, i * 40, level[i][j]);
 				this.cityEnt.push(bldg);
 			}
 		}
@@ -39,8 +47,8 @@ City.prototype.createLevel = function(level) {
 var level1 = [
 [1,0,0,2,0,0,1,0],
 [1,1,0,0,0,0,1,0],
-[0,0,0,2,0,0,0,1],
+[0,0,0,2,0,2,0,1],
 [0,0,0,0,0,0,0,0],
-[0,1,0,2,0,0,0,0],
+[0,1,0,2,0,2,0,0],
 [1,0,0,1,0,0,0,0]];
 
