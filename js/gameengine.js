@@ -33,8 +33,8 @@ GameEngine.prototype.init = function (ctx) {
 	this.ctx.scale(2,2);
 	this.surfaceWidth = this.ctx.canvas.width/2;
 	this.surfaceHeight = this.ctx.canvas.height/2;
-	this.p1tank = new Tank(this.surfaceWidth/2,this.surfaceHeight/2);
-	this.bird = new Eagle(Math.random()*this.surfaceWidth,Math.random()*this.surfaceHeight);
+	this.p1tank = new Tank(level1.startx,level1.starty);
+	this.bird = new Eagle(level1.goalx,level1.goaly);
 	
 	city.createLevel(level1);
 	
@@ -53,19 +53,23 @@ GameEngine.prototype.start = function() {
 GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 38) {
       console.log("up pressed");
-      GEObj.p1tank.moveUp();
+      GEObj.p1tank.direction = "up";
+      GEObj.p1tank.moving = 1;
     }
     if(e.keyCode == 40) {
     	console.log("down pressed");
-      GEObj.p1tank.moveDown();
+    	GEObj.p1tank.direction = "down";
+    	GEObj.p1tank.moving = 1;
     }
     if(e.keyCode == 39) {
     	console.log("right pressed");
-      GEObj.p1tank.moveRight();
+    	GEObj.p1tank.direction = "right";
+    	GEObj.p1tank.moving = 1;
     }
     if(e.keyCode == 37) {
     	console.log("left pressed");
-      GEObj.p1tank.moveLeft();
+    	GEObj.p1tank.direction = "left";
+    	GEObj.p1tank.moving = 1;
 	}
 	if(e.keyCode == 32) {
       console.log("fire");
@@ -77,7 +81,9 @@ GameEngine.prototype.fkeydown = function(e) {
 	}
 	}
 GameEngine.prototype.fkeyup = function(e) {
-	
+	if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 37) {
+		GEObj.p1tank.moving = 0;
+	}
 	}   
 
 GameEngine.prototype.draw = function () {
@@ -100,6 +106,8 @@ GameEngine.prototype.update = function (){
 	console.log('updated');
 	document.body.addEventListener('keydown',this.fkeydown, false);
 	document.body.addEventListener('keyup',this.fkeyup, false);
+	if(GEObj.p1tank.moving) {GEObj.p1tank.move();}
+	GEObj.p1tank.setSprite();
 	for(var i = 0; i < this.p1bullets.length; i++) {
 		this.p1bullets[i].move();
 	}

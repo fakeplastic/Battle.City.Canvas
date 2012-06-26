@@ -34,21 +34,27 @@ City.prototype.createLevel = function(level) {
 		}
 	var BG1 = new BG();
 	this.cityEnt.push(BG1);
-	for (var i = 0; i < level.length; i++) {
-		for (var j = 0; j < level[i].length; j++) {
-			if (!level[i][j] == 0) {
-				var bldg = new Building(j * 40, i * 40, level[i][j]);
+	for (var i = 0; i < level.layout.length; i++) {
+		for (var j = 0; j < level.layout[i].length; j++) {
+			if (!level.layout[i][j] == 0) {
+				var bldg = new Building(j * 40, i * 40, level.layout[i][j]);
 				this.cityEnt.push(bldg);
 			}
 		}
 	}
 }
 
-var level1 = [
+var level1 = {
+	layout: [
 [1,0,0,2,0,0,1,0],
 [1,1,0,0,0,0,1,0],
 [0,0,0,2,0,2,0,1],
 [0,0,0,0,0,0,0,0],
 [0,1,0,2,0,2,0,0],
-[1,0,0,1,0,0,0,0]];
+[1,0,0,1,0,0,0,0]],
+startx: 60,
+starty: 20,
+goalx: 210,
+goaly: 130,
+}
 
