@@ -51,6 +51,24 @@ Tank.prototype.setSprite = function() {
 	}
 }
 
+Tank.prototype.move = function() {
+	switch (this.direction) {
+		case 'up':
+		this.y--;
+		break;
+		case 'down':
+		this.y++;
+		break;
+		case 'left':
+		this.x--;
+		break;
+		case 'right':
+		this.x++;
+		break;
+		
+	}
+}
+
 Tank.prototype.moveUp = function() {
 	this.y--;
 	this.direction = "up";
