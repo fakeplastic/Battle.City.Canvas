@@ -14,28 +14,21 @@ var Bullet = function(x, y, direction) {
 Bullet.prototype.move = function() {
 	switch(this.direction) {
 		case "up":
-			for (var i = 0; i < this.vel; i++) {
+				this.y -= this.vel;
 				this.yt = this.y+1;
-				this.y--;
-			}
+			
 			break;
 		case "right":
-			for (var i = 0; i < this.vel; i++) {
+				this.x += this.vel;
 				this.xt = this.x-1;
-				this.x++;
-			}
 			break;
 		case "down":
-			for (var i = 0; i < this.vel; i++) {
-				this.yt = this.y-1;
-				this.y++;
-			}
+				this.y += this.vel;
+				this.yt = this.y-1;			
 			break;
 		case "left":
-			for (var i = 0; i < this.vel; i++) {
+				this.x -= this.vel;
 				this.xt = this.x+1;
-				this.x--;
-			}
 		default:
 	}
 }

@@ -11,39 +11,28 @@ Tank.prototype.setSprite = function() {
 	switch (this.direction) {
 		case 'up':
 			if (this.isA) {
-				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ub.gif";
-				this.isA = false;
-				return false;
-			}
-			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ua.gif";
-			this.isA = true;
+				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ub.gif";}
+			else if (!this.isA) {
+			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ua.gif";}
 			break;
 		case 'down':
 			if (this.isA) {
 				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Db.gif";
-				this.isA = false;
-				return false;
 			}
-			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Da.gif";
-			this.isA = true;
+			else if (!this.isA) {
+			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Da.gif";}
 			break;
 		case 'left':
 			if (this.isA) {
-				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Lb.gif";
-				this.isA = false;
-				return false;
-			}
-			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_La.gif";
-			this.isA = true;
+				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Lb.gif";}
+				else if (!this.isA) {
+			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_La.gif";}
 			break;
 		case 'right':
 			if (this.isA) {
-				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Rb.gif";
-				this.isA = false;
-				return false;
-			}
-			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ra.gif";
-			this.isA = true;
+				this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Rb.gif";}
+				else if (!this.isA) {
+			this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ra.gif";}
 			break;
 		default:
 			this.sprite.src = null;
@@ -55,40 +44,20 @@ Tank.prototype.move = function() {
 	switch (this.direction) {
 		case 'up':
 		this.y--;
+		this.isA = !this.isA;
 		break;
 		case 'down':
 		this.y++;
+		this.isA = !this.isA;
 		break;
 		case 'left':
 		this.x--;
+		this.isA = !this.isA;
 		break;
 		case 'right':
 		this.x++;
+		this.isA = !this.isA;
 		break;
 		
 	}
-}
-
-Tank.prototype.moveUp = function() {
-	this.y--;
-	this.direction = "up";
-
-}
-
-Tank.prototype.moveDown = function() {
-	this.y++;
-	this.direction = "down";
-
-}
-
-Tank.prototype.moveLeft = function() {
-	this.x--;
-	this.direction = "left"
-
-}
-
-Tank.prototype.moveRight = function() {
-	this.x++;
-	this.direction = "right";
-
 }
