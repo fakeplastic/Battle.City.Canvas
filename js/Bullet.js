@@ -31,4 +31,11 @@ Bullet.prototype.move = function() {
 				this.xt = this.x+1;
 		default:
 	}
+	this.outOfBounds();
+}
+
+Bullet.prototype.outOfBounds = function() {
+	if(this.x < 0 || this.x > GEObj.surfaceWidth || this.y < 0 || this.y > GEObj.surfaceHeight) {
+		this.isRemoved = true;
+	}
 }

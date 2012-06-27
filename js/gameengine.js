@@ -110,7 +110,14 @@ GameEngine.prototype.update = function (){
 	GEObj.p1tank.setSprite();
 	for(var i = 0; i < this.p1bullets.length; i++) {
 		this.p1bullets[i].move();
+		this.p1bullets[i].update
 	}
+	for(var i = this.p1bullets.length-1; i >= 0; i-- ) {
+		if(this.p1bullets[i].isRemoved) {
+			this.p1bullets.splice(i,1);
+		}
+	}
+	
 	};
 
 GameEngine.prototype.loop = function () {
