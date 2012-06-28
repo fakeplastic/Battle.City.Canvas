@@ -14,7 +14,7 @@ window.requestAnimFrame = (function(){
                 window.setTimeout(callback, 1000 / 60);
               };
 })();
-
+function AnimSS ()
 
 function GameEngine () {
 	this.entities = [];
