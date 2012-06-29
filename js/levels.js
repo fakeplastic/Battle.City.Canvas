@@ -52,8 +52,9 @@ var level1 = {
 [0,0,0,0,0,0,0,0],
 [0,1,0,2,0,2,0,0],
 [1,0,0,1,0,0,0,0]],
-startx: 60,
-starty: 20,
+start1x: 60,
+start1y: 20,
+start2x: 
 goalx: 210,
 goaly: 130,
 }

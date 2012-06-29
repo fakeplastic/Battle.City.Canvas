@@ -24,9 +24,11 @@ function GameEngine () {
 	this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.p1tank = null;
+    this.p2tank = null;
     this.bird = null;
-    this.p1bullets = [];
+    this.pbullets = [];
     this.p1lastfired = null;
+    this.p2lastfired = null;
   }
 
 GameEngine.prototype.init = function (ctx) {
@@ -77,7 +79,7 @@ GameEngine.prototype.fkeydown = function(e) {
       console.log("fire");
       if((Date.now() - GEObj.p1lastfired) > 300) {
       var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction);
-      GEObj.p1bullets.push(bullet);
+      GEObj.pbullets.push(bullet);
       GEObj.p1lastfired = Date.now();
       }
 	}
@@ -94,11 +96,11 @@ GameEngine.prototype.draw = function () {
 		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);};
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
 	this.ctx.drawImage(this.bird.sprite,this.bird.x,this.bird.y);
-	for(var i = 0; i < this.p1bullets.length; i++) {
+	for(var i = 0; i < this.pbullets.length; i++) {
 		this.ctx.fillStyle = "rgba(200, 45, 21, 0.3)";
-		this.ctx.fillRect(this.p1bullets[i].xt-1,this.p1bullets[i].yt-1,4,4);
+		this.ctx.fillRect(this.pbullets[i].xt-1,this.pbullets[i].yt-1,4,4);
 		this.ctx.fillStyle = "black";
-		this.ctx.fillRect(this.p1bullets[i].x,this.p1bullets[i].y,2,2);
+		this.ctx.fillRect(this.pbullets[i].x,this.pbullets[i].y,2,2);
 
 	}
 }
@@ -110,13 +112,13 @@ GameEngine.prototype.update = function (){
 	document.body.addEventListener('keyup',this.fkeyup, false);
 	if(GEObj.p1tank.moving) {GEObj.p1tank.move();}
 	GEObj.p1tank.setSprite();
-	for(var i = 0; i < this.p1bullets.length; i++) {
-		this.p1bullets[i].move();
-		this.p1bullets[i].update
+	for(var i = 0; i < this.pbullets.length; i++) {
+		this.pbullets[i].move();
+		this.pbullets[i].update
 	}
-	for(var i = this.p1bullets.length-1; i >= 0; i-- ) {
-		if(this.p1bullets[i].isRemoved) {
-			this.p1bullets.splice(i,1);
+	for(var i = this.pbullets.length-1; i >= 0; i-- ) {
+		if(this.pbullets[i].isRemoved) {
+			this.pbullets.splice(i,1);
 		}
 	}
 	
