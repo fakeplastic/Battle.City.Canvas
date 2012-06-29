@@ -14,7 +14,9 @@ window.requestAnimFrame = (function(){
                 window.setTimeout(callback, 1000 / 60);
               };
 })();
-function AnimSS ()
+function AnimSS (spriteSheet,numSheets) {
+	
+}
 
 function GameEngine () {
 	this.entities = [];
@@ -33,7 +35,7 @@ GameEngine.prototype.init = function (ctx) {
 	this.ctx.scale(2,2);
 	this.surfaceWidth = this.ctx.canvas.width/2;
 	this.surfaceHeight = this.ctx.canvas.height/2;
-	this.p1tank = new Tank(level1.startx,level1.starty);
+	this.p1tank = new Tank(level1.startx,level1.starty,"P1");
 	this.bird = new Eagle(level1.goalx,level1.goaly);
 	
 	city.createLevel(level1);
