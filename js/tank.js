@@ -11,6 +11,9 @@ var Tank = function(x, y, player) {
 	this.isDestroyed = false;
 	this.player = player;
 	this.tanktype = 1;
+	this.bulletsize = 1.5;
+	this.bulletvel = 1.5;
+	this.bbox = [];
 }
 
 Tank.prototype.setSprite = function() {
@@ -64,6 +67,6 @@ Tank.prototype.move = function() {
 		if (this.x < GEObj.surfaceWidth) {this.x += this.vel;}
 		this.isA = !this.isA;
 		break;
-		
 	}
+	this.bbox = [this.x-this.sprite.width/2,this.x+this.sprite.width/2,this.y-this.sprite.height/2,this.y-this.sprite.height/2,];
 }

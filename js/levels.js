@@ -6,6 +6,7 @@ var Building = function(x, y, type) {
 	this.y = Math.floor(y / 40) * 40;
 	this.type = type;
 	this.rubble = false;
+	this.bbox = [];
 	this.sprite = new Image();
 	if (this.type == 1) {
 		if (this.rubble) {
@@ -20,6 +21,7 @@ var Building = function(x, y, type) {
 			this.sprite.src = "img/city/building2-80x120.png";
 		}
 	}
+	this.bbox = [this.x-this.sprite.width/2,this.x+this.sprite.width/2,this.y-this.sprite.height/2,this.y-this.sprite.height/2,];
 }
 City = function() {
 	this.cityEnt = [];
@@ -54,7 +56,8 @@ var level1 = {
 [1,0,0,1,0,0,0,0]],
 start1x: 60,
 start1y: 20,
-start2x: 
+start2x: 310,
+start2y: 230,
 goalx: 210,
 goaly: 130,
 }
