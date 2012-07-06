@@ -3,42 +3,68 @@
  */
 var Bullet = function(x, y, direction, size, vel) {
 	this.x = x;
-	this.xt = x+1;
+	this.ox = x;
+	this.xt = x-1;
 	this.y = y;
-	this.yt = y+1;
+	this.oy = y;
+	this.yt = y-1;
 	this.vel = vel;
 	this.direction = direction;
 	this.isRemoved = false;
 	this.size = size;
-	this.bbox = []
+	this.range = 100;
+	this.damage = 25;
+	this.bbox = [];
 }
 
 Bullet.prototype.move = function() {
 	switch(this.direction) {
 		case "up":
 				this.y -= this.vel;
-				this.yt = this.y+2;
+				this.yt = this.y+1;
 			break;
 		case "right":
 				this.x += this.vel;
-				this.xt = this.x;
+				this.xt = this.x-3;
 			break;
 		case "down":
 				this.y += this.vel;
-				this.yt = this.y;
+				this.yt = this.y-3;
 			break;
 		case "left":
 				this.x -= this.vel;
-				this.xt = this.x+2;
+				this.xt = this.x+1;
 			break;	
 		default:
 	}
+
 	this.outOfBounds();
-	this.bbox = [this.x-this.size/2,this.x+this.size/2,this.y-this.size,this.y-this.size/2,];
+	this.outOfRange();
+	this.bbox = [this.x-this.size/2,this.x+this.size/2,this.y-this.size,this.y+this.size/2,];
+	this.collision();	
+
 }
 
 Bullet.prototype.outOfBounds = function() {
 	if(this.x < 0 || this.x > GEObj.surfaceWidth || this.y < 0 || this.y > GEObj.surfaceHeight) {
 		this.isRemoved = true;
 	}
+}
+
+Bullet.prototype.outOfRange = function() {
+	if (Math.abs(this.x-this.ox) > this.range || Math.abs(this.y-this.oy) > this.range) {
+		this.isRemoved = true;
+		
+	}
+}
+
+
+Bullet.prototype.collision = function () {
+	for(var i = 0; i < city.cityEnt.length; i++) {
+		if(rectCollision(this,city.cityEnt[i])) {
+			this.isRemoved = true;
+			city.cityEnt[i].isRubble = true;
+		}
+	}
+	
 }

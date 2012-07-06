@@ -1,14 +1,13 @@
 var Tank = function(x, y, player) {
 	this.x = x;
-	this.prevx = x;
 	this.y = y;
-	this.prevy = y;
 	this.vel = 0.5;
 	this.sprite = new Image();
 	this.sprite.src = "img/tank1/NES_Battle_Citty_P1T1_Ua.gif";
 	this.isA = true;
 	this.direction = "up";
 	this.isDestroyed = false;
+	this.life = 100;
 	this.player = player;
 	this.tanktype = 1;
 	this.bulletsize = 1.5;
@@ -50,6 +49,8 @@ Tank.prototype.setSprite = function() {
 }
 
 Tank.prototype.move = function() {
+	var px = this.x;
+	var py = this.y;
 	switch (this.direction) {
 		case 'up':
 		if (this.y > 0) {this.y -= this.vel;}
@@ -68,5 +69,6 @@ Tank.prototype.move = function() {
 		this.isA = !this.isA;
 		break;
 	}
-	this.bbox = [this.x-this.sprite.width/2,this.x+this.sprite.width/2,this.y-this.sprite.height/2,this.y-this.sprite.height/2,];
+	this.bbox = [this.x-this.sprite.width/2,this.x+this.sprite.width/2,this.y-this.sprite.height/2,this.y+this.sprite.height/2];
+	
 }

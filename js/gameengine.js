@@ -14,8 +14,11 @@ window.requestAnimFrame = (function(){
                 window.setTimeout(callback, 1000 / 60);
               };
 })();
-function AnimSS (spriteSheet,numSheets) {
-	
+function AnimSS (x,y,spriteSheet,numSheets,time) {
+	this.x = x;
+	this.y = y;
+	this.spritesheet = spritesheet;
+	this.numSheets = numSheets;
 }
 
 function GameEngine () {
@@ -33,6 +36,8 @@ function GameEngine () {
 
 GameEngine.prototype.init = function (ctx) {
 	console.log('game initialized');
+	document.body.addEventListener('keydown',this.fkeydown, false);
+	document.body.addEventListener('keyup',this.fkeyup, false);
 	this.ctx = ctx;
 	this.ctx.scale(2,2);
 	this.surfaceWidth = this.ctx.canvas.width/2;
@@ -93,25 +98,41 @@ GameEngine.prototype.fkeyup = function(e) {
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
+	this.ctx.drawImage(city.BG,0,0);
 	for(var i = 0; i < city.cityEnt.length; i++) {
-		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);};
+		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);
+		this.ctx.beginPath();
+	this.ctx.moveTo(city.cityEnt[i].bbox[0],city.cityEnt[i].bbox[2]);
+	this.ctx.lineTo(city.cityEnt[i].bbox[1],city.cityEnt[i].bbox[3]);
+	this.ctx.lineWidth = 2;
+    this.ctx.strokeStyle = 'green';
+    this.ctx.stroke();
+  };
 	this.ctx.drawImage(this.bird.sprite,this.bird.x,this.bird.y);
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
-
+	this.ctx.beginPath();
+	this.ctx.moveTo(this.p1tank.bbox[0],this.p1tank.bbox[2]);
+	this.ctx.lineTo(this.p1tank.bbox[1],this.p1tank.bbox[3]);
+	this.ctx.lineWidth = 2;
+    this.ctx.strokeStyle = 'green';
+    this.ctx.stroke();
 	for(var i = 0; i < this.pbullets.length; i++) {
 		this.ctx.fillStyle = "rgba(200, 45, 21, 0.5)";
-		this.ctx.fillRect(this.pbullets[i].xt-(this.pbullets[i].size/2)-2,this.pbullets[i].yt-(this.pbullets[i].size/2)-2,this.pbullets[i].size+2,this.pbullets[i].size+2);
-		this.ctx.fillStyle = "black";
+		this.ctx.fillRect(this.pbullets[i].xt-(this.pbullets[i].size/2),this.pbullets[i].yt-(this.pbullets[i].size/2),this.pbullets[i].size+2,this.pbullets[i].size+2);
+		this.ctx.fillStyle = "white";
 		this.ctx.fillRect(this.pbullets[i].x-(this.pbullets[i].size/2),this.pbullets[i].y-(this.pbullets[i].size/2),this.pbullets[i].size,this.pbullets[i].size);
+			this.ctx.beginPath();
+	this.ctx.moveTo(this.pbullets[i].bbox[0],this.pbullets[i].bbox[2]);
+	this.ctx.lineTo(this.pbullets[i].bbox[1],this.pbullets[i].bbox[3]);
+	this.ctx.lineWidth = .5;
+    this.ctx.strokeStyle = 'green';
+    this.ctx.stroke();
 
 	}
 }
 
 
 GameEngine.prototype.update = function (){
-	console.log('updated');
-	document.body.addEventListener('keydown',this.fkeydown, false);
-	document.body.addEventListener('keyup',this.fkeyup, false);
 	if(GEObj.p1tank.moving) {GEObj.p1tank.move();}
 	GEObj.p1tank.setSprite();
 	for(var i = 0; i < this.pbullets.length; i++) {
@@ -123,7 +144,7 @@ GameEngine.prototype.update = function (){
 			this.pbullets.splice(i,1);
 		}
 	}
-	
+	city.update();
 	};
 
 GameEngine.prototype.loop = function () {
@@ -137,14 +158,14 @@ GameEngine.prototype.loop = function () {
 function rectCollision (objA, objB) {
 	var xc = false;
 	var yc = false;
-	if(objA.xc1 > objB.xc1 && objA.xc1 < objB.xc2)
+	if(objA.bbox[0] > objB.bbox[0] && objA.bbox[0] < objB.bbox[1])
 	{xc = true;}
-	else if (objA.xc2 > objB.xc1 && objA.xc2 < objB.xc2)
+	else if (objA.bbox[1] > objB.bbox[0] && objA.bbox[1] < objB.bbox[1])
 	{xc = true;};
 	
-	if(objA.yc1 > objB.yc1 && objA.yc1 < objB.yc2)
+	if(objA.bbox[2] > objB.bbox[2] && objA.bbox[2] < objB.bbox[3])
 	{yc = true;}
-	else if (objA.yc2 > objB.yc1 && objA.yc2 < objB.yc2)
+	else if (objA.bbox[3] > objB.bbox[2] && objA.bbox[3] < objB.bbox[3])
 	{yc = true;};
 	if (xc && yc) {
 		return true;

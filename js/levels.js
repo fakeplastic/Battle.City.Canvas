@@ -6,36 +6,30 @@ var Building = function(x, y, type) {
 	this.y = Math.floor(y / 40) * 40;
 	this.type = type;
 	this.rubble = false;
-	this.bbox = [];
 	this.sprite = new Image();
-	if (this.type == 1) {
-		if (this.rubble) {
-			this.sprite.src = "img/city/rubble1-sq80.png";
-		} else {
-			this.sprite.src = "img/city/building1-sq80.png";
-		}
-	} else if (this.type == 2) {
-		if (this.rubble) {
-			this.sprite.src = "img/city/rubble2-80x120.png";
-		} else {
-			this.sprite.src = "img/city/building2-80x120.png";
-		}
-	}
-	this.bbox = [this.x-this.sprite.width/2,this.x+this.sprite.width/2,this.y-this.sprite.height/2,this.y-this.sprite.height/2,];
+	this.sprite.src = "";
+	switch(this.type) {
+		case 1:
+		this.altsrc = "img/city/rubble1-sq80.gif";
+		this.sprite.src = "img/city/building1-sq80.gif";
+			this.bbox = [this.x,this.x+40,this.y,this.y+40];
+		break;
+		case 2:
+		this.altsrc = "img/city/rubble2-80x120.gif";
+		this.sprite.src = "img/city/building2-80x120.gif";
+		this.bbox = [this.x,this.x+60,this.y,this.y+40];
+		break;
+	};
 }
 City = function() {
 	this.cityEnt = [];
+	this.BG = null;
 }
 
 City.prototype.createLevel = function(level) {
-	var BG = function (){
-		this.x = 0;
-		this.y = 0;
-		this.sprite = new Image();
-		this.sprite.src = "img/Asphalt_texture.JPG";
-		}
-	var BG1 = new BG();
-	this.cityEnt.push(BG1);
+	
+	this.BG = new Image();
+	this.BG.src = level1.imgsrc;
 	for (var i = 0; i < level.layout.length; i++) {
 		for (var j = 0; j < level.layout[i].length; j++) {
 			if (!level.layout[i][j] == 0) {
@@ -44,6 +38,33 @@ City.prototype.createLevel = function(level) {
 			}
 		}
 	}
+}
+
+City.prototype.update = function() {
+	for(var i = 0; i < this.cityEnt.length; i++) {
+		if(this.cityEnt[i].isRubble) {
+			this.cityEnt[i].sprite.src = this.cityEnt[i].altsrc;
+			this.cityEnt[i].bbox = [0,0,0,0];
+		}
+	}
+	
+}
+
+var level0 = {
+	layout: [
+[0,0,0,0,0,0,0,0],
+[0,1,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0]],
+start1x: 60,
+start1y: 20,
+start2x: 310,
+start2y: 230,
+goalx: 210,
+goaly: 130,
+imgsrc: "img/Asphalt_texture.JPG",
 }
 
 var level1 = {
@@ -60,5 +81,6 @@ start2x: 310,
 start2y: 230,
 goalx: 210,
 goaly: 130,
+imgsrc: "img/Asphalt_texture.JPG",
 }
 
