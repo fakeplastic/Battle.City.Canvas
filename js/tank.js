@@ -70,5 +70,11 @@ Tank.prototype.move = function() {
 		break;
 	}
 	this.bbox = [this.x-this.sprite.width/2,this.x+this.sprite.width/2,this.y-this.sprite.height/2,this.y+this.sprite.height/2];
-	
+	for(var i = 0; i < city.cityEnt.length; i++) {
+		if(rectCollision(this,city.cityEnt[i])) {
+			this.x = px;
+			this.y = py;
+		}
+	}
 }
+

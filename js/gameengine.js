@@ -21,6 +21,8 @@ function AnimSS (x,y,spriteSheet,numSheets,time) {
 	this.numSheets = numSheets;
 }
 
+AnimSS.prototype.animate() 
+
 function GameEngine () {
 	this.entities = [];
 	this.ctx = null;
