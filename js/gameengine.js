@@ -14,14 +14,19 @@ window.requestAnimFrame = (function(){
                 window.setTimeout(callback, 1000 / 60);
               };
 })();
-function AnimSS (x,y,spriteSheet,numSheets,time) {
+function AnimSS (x,y,spriteSheet,numSheets,totaltime,loop) {
 	this.x = x;
 	this.y = y;
 	this.spritesheet = spritesheet;
 	this.numSheets = numSheets;
+	this.totaltime = totaltime;
+	this.loop = loop;
+	this.elapsedtime = 0;
 }
 
-AnimSS.prototype.animate() 
+AnimSS.prototype.drawframe = function (x,y,ctx) {
+
+}
 
 function GameEngine () {
 	this.entities = [];
