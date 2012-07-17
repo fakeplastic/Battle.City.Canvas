@@ -54,6 +54,8 @@ Bullet.prototype.outOfBounds = function() {
 Bullet.prototype.outOfRange = function() {
 	if (Math.abs(this.x-this.ox) > this.range || Math.abs(this.y-this.oy) > this.range) {
 		this.isRemoved = true;
+		var explosion = new AnimSS("img/explosions/MISC_EXPLOSION.png",this.x,this.y,9,50,false)
+		GEObj.explosions.push(explosion);
 		
 	}
 }
@@ -63,7 +65,11 @@ Bullet.prototype.collision = function () {
 	for(var i = 0; i < city.cityEnt.length; i++) {
 		if(rectCollision(this,city.cityEnt[i])) {
 			this.isRemoved = true;
-			city.cityEnt[i].isRubble = true;
+			var explosion = new AnimSS("img/explosions/MISC_EXPLOSION.png",this.x,this.y,9,50,false)
+			GEObj.explosions.push(explosion);
+			city.cityEnt[i].isRubble = true
+			var explosion2 = new AnimSS("img/explosions/EXPLOSION.png",city.cityEnt[i].x + (city.cityEnt[i].sprite.width/2),city.cityEnt[i].y,20,75,false);
+			GEObj.explosions.push(explosion2);
 		}
 	}
 	

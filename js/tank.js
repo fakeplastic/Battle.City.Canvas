@@ -13,6 +13,7 @@ var Tank = function(x, y, player) {
 	this.bulletsize = 1.5;
 	this.bulletvel = 1.5;
 	this.bbox = [];
+	this.lastFired = 0;
 }
 
 Tank.prototype.setSprite = function() {

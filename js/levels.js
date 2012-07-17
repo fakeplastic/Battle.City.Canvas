@@ -7,19 +7,21 @@ var Building = function(x, y, type) {
 	this.type = type;
 	this.rubble = false;
 	this.sprite = new Image();
-	this.sprite.src = "";
 	switch(this.type) {
 		case 1:
 		this.altsrc = "img/city/rubble1-sq80.gif";
-		this.sprite.src = "img/city/building1-sq80.gif";
+		this.mainsrc = "img/city/building1-sq80.gif";
 			this.bbox = [this.x,this.x+40,this.y,this.y+40];
 		break;
 		case 2:
 		this.altsrc = "img/city/rubble2-80x120.gif";
-		this.sprite.src = "img/city/building2-80x120.gif";
+		this.mainsrc = "img/city/building2-80x120.gif";
 		this.bbox = [this.x,this.x+60,this.y,this.y+40];
 		break;
 	};
+	this.sprite.src = this.mainsrc;
+	this.cx = this.x + this.sprite.width;
+	this.cy = this.y + this.sprite.height;
 }
 City = function() {
 	this.cityEnt = [];
