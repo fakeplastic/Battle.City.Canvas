@@ -54,7 +54,7 @@ Bullet.prototype.outOfBounds = function() {
 Bullet.prototype.outOfRange = function() {
 	if (Math.abs(this.x-this.ox) > this.range || Math.abs(this.y-this.oy) > this.range) {
 		this.isRemoved = true;
-		var explosion = new AnimSS("img/explosions/MISC_EXPLOSION.png",this.x,this.y,9,50,false)
+		var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/4,9,50,false)
 		GEObj.explosions.push(explosion);
 		
 	}
@@ -65,10 +65,10 @@ Bullet.prototype.collision = function () {
 	for(var i = 0; i < city.cityEnt.length; i++) {
 		if(rectCollision(this,city.cityEnt[i])) {
 			this.isRemoved = true;
-			var explosion = new AnimSS("img/explosions/MISC_EXPLOSION.png",this.x,this.y,9,50,false)
+			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false)
 			GEObj.explosions.push(explosion);
 			city.cityEnt[i].isRubble = true
-			var explosion2 = new AnimSS("img/explosions/EXPLOSION.png",city.cityEnt[i].x + (city.cityEnt[i].sprite.width/2),city.cityEnt[i].y,20,75,false);
+			var explosion2 = new AnimSS(ASM.getImg("img/explosions/EXPLOSION.png"),"c",city.cityEnt[i].x + (city.cityEnt[i].sprite.width/2),city.cityEnt[i].y + (city.cityEnt[i].sprite.height/4),0.5,20,75,false);
 			GEObj.explosions.push(explosion2);
 		}
 	}
