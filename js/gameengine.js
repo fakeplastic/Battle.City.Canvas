@@ -14,9 +14,9 @@ window.requestAnimFrame = (function(){
                 window.setTimeout(callback, 1000 / 60);
               };
 })();
-function AnimSS (spriteSheet, x, y, numSheets,frameTime,loop) {
-	this.spriteSheet = new Image();
-	this.spriteSheet.src = spriteSheet;
+function AnimSS (spriteSheet, loc, x, y, scale, numSheets,frameTime,loop) {
+	this.scale = scale;
+	this.spriteSheet = spriteSheet;
 	this.frameHeight = this.spriteSheet.height;
 	this.numSheets = numSheets;
 	this.frameWidth = this.spriteSheet.width / this.numSheets;
@@ -26,8 +26,15 @@ function AnimSS (spriteSheet, x, y, numSheets,frameTime,loop) {
 	this.starttime = Date.now();
 	this.elapsedtime = 0;
 	this.isRemoved = false;
-	this.locx = x - (this.frameWidth / 2);
-	this.locy = y - (this.frameHeight / 2);
+	this.locx = x - (this.frameWidth / 2)*this.scale;
+	switch(loc) {
+		case "c":
+			this.locy = y - (this.frameHeight / 2)*this.scale;
+			break;
+		case "b":
+			this.locy = y - this.frameHeight*this.scale;
+			break; 
+	}
 }
 
 AnimSS.prototype.drawFrame = function (ctx) {
@@ -44,7 +51,7 @@ AnimSS.prototype.drawFrame = function (ctx) {
 					index * this.frameWidth, 0,
 					this.frameWidth, this.frameHeight,
 					this.locx, this.locy,
-					this.frameWidth, this.frameHeight);
+					this.frameWidth * this.scale, this.frameHeight * this.scale);
 }
 
 
@@ -55,7 +62,8 @@ function GameEngine () {
     this.surfaceHeight = null;
     this.p1tank = null;
     this.p2tank = null;
-    this.bird = null;
+    this.p1eagle = null;
+    this.p2eagle = null;
     this.pbullets = [];
     this.explosions = [];
   }
@@ -70,7 +78,8 @@ GameEngine.prototype.init = function (ctx) {
 	this.surfaceHeight = this.ctx.canvas.height/2;
 	this.p1tank = new Tank(level1.start1x,level1.start1y,"P1");
 	this.p2tank = new Tank(level1.start2x,level1.start2y,"P2");
-	this.bird = new Eagle(level1.goalx,level1.goaly);
+	this.p1eagle = new Eagle(level1.goal1x,level1.goal1y);
+	this.p2eagle = new Eagle(level1.goal2x,level1.goal2y);
 	this.pbullets = [];
 	city.createLevel(level1);
 	
@@ -128,7 +137,7 @@ GameEngine.prototype.draw = function () {
 	for(var i = 0; i < city.cityEnt.length; i++) {
 		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);
   };
-	this.ctx.drawImage(this.bird.sprite,this.bird.x,this.bird.y);
+	this.ctx.drawImage(this.p1eagle.sprite,this.p1eagle.x,this.p1eagle.y);
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
 	for(var i = 0; i < this.pbullets.length; i++) {
 		this.ctx.fillStyle = "rgba(200, 45, 21, 0.5)";
@@ -192,5 +201,11 @@ function rectCollision (objA, objB) {
 
 var GEObj = new GameEngine();
 var city = new City();
+var ASM = new AssetMan();
+ASM.AddQueue("img/explosions/MISC_EXPLOSION.png")
+ASM.AddQueue("img/explosions/EXPLOSION.png")
+
+ASM.dnLoad(function() {
 GEObj.init(ctx);
 GEObj.start();
+})

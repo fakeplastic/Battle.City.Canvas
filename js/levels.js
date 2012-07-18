@@ -64,8 +64,11 @@ start1x: 60,
 start1y: 20,
 start2x: 310,
 start2y: 230,
-goalx: 210,
-goaly: 130,
+goal1x: 210,
+goal1y: 130,
+goal2x: 20,
+goal2y: 50,
+
 imgsrc: "img/Asphalt_texture.JPG",
 }
 
@@ -81,8 +84,10 @@ start1x: 60,
 start1y: 20,
 start2x: 310,
 start2y: 230,
-goalx: 210,
-goaly: 130,
+goal1x: 210,
+goal1y: 130,
+goal2x: 20,
+goal2y: 50,
 imgsrc: "img/Asphalt_texture.JPG",
 }
 

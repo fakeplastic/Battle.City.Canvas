@@ -1,48 +1,45 @@
-/**
- * @author choneyman
- */
-
-/* Asset manager to download all images first
- * 
- */
+/* For loading images before they are needed. */
 
 function AssetMan () {
-	this.done = 0;
-	this.errors = 0;
+	this.yay = 0;
+	this.nay = 0;
 	this.cache = {};
 	this.dnQueue = [];
-}
 
-/*function to add item to the queue*/
-AssetMan.prototype.createQueue = function(path) {
+};
+
+AssetMan.prototype.AddQueue = function(path) {
 	this.dnQueue.push(path);
-}
+};
 
-/*function to check if its done*/
-AssetMan.prototype.isDone = function(){
-	return(this.dnQueue.length == this.done + this.errors);
-}
-
-/*function to download all images and cache them*/
-AssetMan.prototype.dnAll = function (callback) {
-	for (var i = 0; i < this.dnQueue.length; i++){
-		var path = this.dnQueue[1];
+AssetMan.prototype.dnLoad = function(callback) {
+	for (var i = 0; i < this.dnQueue.length; i++) {
+		var path = this.dnQueue[i];
 		var img = new Image();
-		var that = this;
+		var ASM = this;
 		img.addEventListener("load", function() {
-			that.done += 1;
-			if (that.isDone()) { callback(); }
-			});
-		img.addEventListener("error", function() {
-			that.errors += 1;
-         	if (that.isDone()) { callback(); }
-         	});
-         	img.src = path;
-         	this.cache[path] = image
-          
-	}
-}
+			ASM.yay += 1;
+			if(ASM.isDone()) {
+				callback();
 
-AssetMan.prototype.getAsset = Function() {
+			}
+
+		})
+		img.addEventListener("error", function() {
+			ASM.nay += 1;
+			if(ASM.isDone()) {
+				callback();
+			}
+		})
+		img.src = path;
+		this.cache[path] = img;
+	};
+};
+
+AssetMan.prototype.getImg = function(path) {
 	return this.cache[path];
+};
+
+AssetMan.prototype.isDone = function() {
+	return (this.yay + this.nay === this.dnQueue.length);
 }
