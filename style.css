@@ -1,0 +1,43 @@
+
+@font-face {
+    font-family: '1942report1942report';
+    src: url('1942-report-fontfacekit/1942-webfont.eot');
+    src: url('1942-report-fontfacekit/1942-webfont.eot?#iefix') format('embedded-opentype'),
+         url('1942-report-fontfacekit/1942-webfont.woff') format('woff'),
+         url('1942-report-fontfacekit/1942-webfont.ttf') format('truetype'),
+         url('1942-report-fontfacekit/1942-webfont.svg#1942report1942report') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ body {
+	font-family: Century Gothic, sans-serif;
+	background-color: #000;
+	margin: 0;
+	}
+canvas {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			div {
+				margin: 30px auto;
+				width: 640px;
+				text-align: center;
+			}
+			#T {
+				font-family: "Lucida Console";
+				color: #FFFFFF;
+				text-shadow: 
+				0.1em 0.1em 0.1em #000,
+				0 -0.1em 3px #FE8811,
+				0 -0.1em 8px #E68A00,
+				0 -0.2em 12px #FFAD33,
+				0 -0.3em 16px #FFAD00,
+				0 -0.4em 20px #FFFF00,
+				0 -1em 16px #FFFFFF;
+			}
+			p {}
+
+p.typeWriter {font: 24px/30px '1942report1942report', Arial, sans-serif;
+				color: white}
