@@ -12,6 +12,7 @@
 
  body {
 	font-family: Century Gothic, sans-serif;
+	color: white;
 	background-color: #000;
 	margin: 0;
 	}
@@ -37,7 +38,6 @@ canvas {
 				0 -0.4em 20px #FFFF00,
 				0 -1em 16px #FFFFFF;
 			}
-			p {}
 
 p.typeWriter {font: 24px/30px '1942report1942report', Arial, sans-serif;
 				color: white}
