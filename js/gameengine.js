@@ -127,9 +127,9 @@ GameEngine.prototype.fkeydown = function(e) {
 	}
 GameEngine.prototype.fkeyup = function(e) {
 	if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 37) {
-		GEObj.p1tank.moving = 0;
-	}
-	}   
+		GEObj.p1tank.moving = 0;}
+	if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 37) {
+		GEObj.p2tank.moving = 0;}   
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
@@ -139,6 +139,7 @@ GameEngine.prototype.draw = function () {
   };
 	this.ctx.drawImage(this.p1eagle.sprite,this.p1eagle.x,this.p1eagle.y);
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
+	this.ctx.drawImage(this.p2tank.sprite,this.p2tank.x-this.p2tank.sprite.width/2,this.p2tank.y-this.p2tank.sprite.height/2);
 	for(var i = 0; i < this.pbullets.length; i++) {
 		this.ctx.fillStyle = "rgba(200, 45, 21, 0.5)";
 		this.ctx.fillRect(this.pbullets[i].xt-(this.pbullets[i].size/2),this.pbullets[i].yt-(this.pbullets[i].size/2),this.pbullets[i].size+2,this.pbullets[i].size+2);
@@ -154,6 +155,8 @@ GameEngine.prototype.draw = function () {
 GameEngine.prototype.update = function (){
 	if(GEObj.p1tank.moving) {GEObj.p1tank.move();}
 	GEObj.p1tank.setSprite();
+	if(GEObj.p2tank.moving) {GEObj.p2tank.move();}
+	GEObj.p2tank.setSprite();
 	for(var i = 0; i < this.pbullets.length; i++) {
 		this.pbullets[i].move();
 		this.pbullets[i].update
