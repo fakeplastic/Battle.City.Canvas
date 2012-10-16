@@ -119,24 +119,53 @@ GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 32) {
       console.log("fire");
       if((Date.now() - GEObj.p1tank.lastFired) > 300) {
-      var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel);
-      GEObj.pbullets.push(bullet);
-      GEObj.p1tank.lastFired = Date.now();
+      	var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel);
+      	GEObj.pbullets.push(bullet);
+      	GEObj.p1tank.lastFired = Date.now();
+      	}
       }
+    if(e.keyCode == 87) {
+      console.log("p2 up pressed");
+      GEObj.p2tank.direction = "up";
+      GEObj.p2tank.moving = 1;
+    }
+    if(e.keyCode == 90) {
+    	console.log("p2 down pressed");
+    	GEObj.p2tank.direction = "down";
+    	GEObj.p2tank.moving = 1;
+    }
+    if(e.keyCode == 83) {
+    	console.log("p2 right pressed");
+    	GEObj.p2tank.direction = "right";
+    	GEObj.p2tank.moving = 1;
+    }
+    if(e.keyCode == 65) {
+    	console.log("p2 left pressed");
+    	GEObj.p2tank.direction = "left";
+    	GEObj.p2tank.moving = 1;
 	}
+	if(e.keyCode == 67) {
+      console.log("fire");
+      if((Date.now() - GEObj.p2tank.lastFired) > 300) {
+      	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel);
+      	GEObj.pbullets.push(bullet);
+      	GEObj.p2tank.lastFired = Date.now();
+      	}
+		}
 	}
 GameEngine.prototype.fkeyup = function(e) {
 	if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 37) {
 		GEObj.p1tank.moving = 0;}
-	if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 37) {
+	if(e.keyCode == 87 || e.keyCode == 90 || e.keyCode == 83 || e.keyCode == 65) {
 		GEObj.p2tank.moving = 0;}   
+	}
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
 	this.ctx.drawImage(city.BG,0,0);
 	for(var i = 0; i < city.cityEnt.length; i++) {
 		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);
-  };
+  		};
 	this.ctx.drawImage(this.p1eagle.sprite,this.p1eagle.x,this.p1eagle.y);
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
 	this.ctx.drawImage(this.p2tank.sprite,this.p2tank.x-this.p2tank.sprite.width/2,this.p2tank.y-this.p2tank.sprite.height/2);
@@ -172,7 +201,7 @@ GameEngine.prototype.update = function (){
 		}
 	}
 	city.update();
-	};
+	}
 
 GameEngine.prototype.loop = function () {
 	var now = Date.now();
