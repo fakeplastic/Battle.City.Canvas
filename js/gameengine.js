@@ -78,8 +78,8 @@ GameEngine.prototype.init = function (ctx) {
 	this.surfaceHeight = this.ctx.canvas.height/2;
 	this.p1tank = new Tank(level1.start1x,level1.start1y,"P1");
 	this.p2tank = new Tank(level1.start2x,level1.start2y,"P2");
-	this.p1eagle = new Eagle(level1.goal1x,level1.goal1y);
-	this.p2eagle = new Eagle(level1.goal2x,level1.goal2y);
+	this.p1eagle = new Eagle(level1.goal1x,level1.goal1y,"P1");
+	this.p2eagle = new Eagle(level1.goal2x,level1.goal2y,"P2");
 	this.pbullets = [];
 	city.createLevel(level1);
 	
@@ -119,7 +119,7 @@ GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 32) {
       console.log("fire");
       if((Date.now() - GEObj.p1tank.lastFired) > 300) {
-      	var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel);
+      	var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel,  GEObj.p1tank.player);
       	GEObj.pbullets.push(bullet);
       	GEObj.p1tank.lastFired = Date.now();
       	}
@@ -145,9 +145,9 @@ GameEngine.prototype.fkeydown = function(e) {
     	GEObj.p2tank.moving = 1;
 	}
 	if(e.keyCode == 67) {
-      console.log("fire");
+      console.log("p2 fire");
       if((Date.now() - GEObj.p2tank.lastFired) > 300) {
-      	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel);
+      	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel, GEObj.p2tank.player);
       	GEObj.pbullets.push(bullet);
       	GEObj.p2tank.lastFired = Date.now();
       	}
@@ -167,6 +167,7 @@ GameEngine.prototype.draw = function () {
 		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);
   		};
 	this.ctx.drawImage(this.p1eagle.sprite,this.p1eagle.x,this.p1eagle.y);
+	this.ctx.drawImage(this.p2eagle.sprite,this.p2eagle.x,this.p2eagle.y);
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
 	this.ctx.drawImage(this.p2tank.sprite,this.p2tank.x-this.p2tank.sprite.width/2,this.p2tank.y-this.p2tank.sprite.height/2);
 	for(var i = 0; i < this.pbullets.length; i++) {
@@ -200,6 +201,8 @@ GameEngine.prototype.update = function (){
 			this.explosions.splice(i,1);
 		}
 	}
+	GEObj.p1tank.update()
+	GEObj.p2tank.update()
 	city.update();
 	}
 

@@ -1,7 +1,7 @@
 /**
  * @author Cory
  */
-var Bullet = function(x, y, direction, size, vel) {
+var Bullet = function(x, y, direction, size, vel, player) {
 	this.x = x;
 	this.ox = x;
 	this.xt = x-1;
@@ -14,6 +14,7 @@ var Bullet = function(x, y, direction, size, vel) {
 	this.size = size;
 	this.range = 100;
 	this.damage = 25;
+	this.player = player
 	this.bbox = [];
 }
 
@@ -62,12 +63,28 @@ Bullet.prototype.outOfRange = function() {
 
 
 Bullet.prototype.collision = function () {
-	for(var i = 0; i < city.cityEnt.length; i++) {
-		if(rectCollision(this,city.cityEnt[i])) {
+	if (this.player == "P2") {
+	if(rectCollision(this,GEObj.p1tank)) {
 			this.isRemoved = true;
-			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false)
+			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false);
 			GEObj.explosions.push(explosion);
-			city.cityEnt[i].isRubble = true
+			GEObj.p1tank.life = GEObj.p1tank.life - this.damage;
+		}
+	}
+	if (this.player == "P1") {
+	if(rectCollision(this,GEObj.p2tank)) {
+			this.isRemoved = true;
+			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false);
+			GEObj.explosions.push(explosion);
+			GEObj.p2tank.life = GEObj.p2tank.life - this.damage;
+		}
+	}
+	for(var i = 0; i < city.cityEnt.length; i++) {
+			if(rectCollision(this,city.cityEnt[i])) {
+			this.isRemoved = true;
+			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false);
+			GEObj.explosions.push(explosion);
+			city.cityEnt[i].damage++;
 			var explosion2 = new AnimSS(ASM.getImg("img/explosions/EXPLOSION.png"),"c",city.cityEnt[i].x + (city.cityEnt[i].sprite.width/2),city.cityEnt[i].y + (city.cityEnt[i].sprite.height/4),0.5,20,75,false);
 			GEObj.explosions.push(explosion2);
 		}

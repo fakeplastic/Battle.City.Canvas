@@ -17,6 +17,10 @@ var Tank = function(x, y, player) {
 }
 
 Tank.prototype.setSprite = function() {
+	if (this.isDestroyed) {
+		this.sprite.src = "img/tank1/NES_Battle_Citty_" + this.player + "T" + "1" + "destroyed.gif";
+		return;
+	}
 	switch (this.direction) {
 		case 'up':
 			if (this.isA) {
@@ -77,5 +81,11 @@ Tank.prototype.move = function() {
 			this.y = py;
 		}
 	}
+
+}
+
+Tank.prototype.update = function() {
+	
+
 }
 
