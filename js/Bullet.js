@@ -68,15 +68,23 @@ Bullet.prototype.collision = function () {
 			this.isRemoved = true;
 			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false);
 			GEObj.explosions.push(explosion);
-			GEObj.p1tank.life = GEObj.p1tank.life - this.damage;
+			GEObj.p1tank.life = GEObj.p1tank.life - (this.damage * GEObj.p1tank.defense);
+			if(GEObj.p1tank.life <= 0) {
+				var explosion3 = new AnimSS(ASM.getImg("img/explosions/EXPLOSION2.png"),"b", GEObj.p1tank.x + GEObj.p1tank.sprite.width/2,GEObj.p1tank.y + GEObj.p1tank.sprite.height,0.5,20,75,false);
+				GEObj.explosions.push(explosion3);
+			}
 		}
 	}
 	if (this.player == "P1") {
-	if(rectCollision(this,GEObj.p2tank)) {
-			this.isRemoved = true;
-			var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false);
-			GEObj.explosions.push(explosion);
-			GEObj.p2tank.life = GEObj.p2tank.life - this.damage;
+		if(rectCollision(this,GEObj.p2tank)) {
+				this.isRemoved = true;
+				var explosion = new AnimSS(ASM.getImg("img/explosions/MISC_EXPLOSION.png"),"b",this.x,this.y,this.size/2,9,50,false);
+				GEObj.explosions.push(explosion);
+				GEObj.p2tank.life = GEObj.p2tank.life - (this.damage * GEObj.p2tank.defense);
+				if(GEObj.p2tank.life <= 0) {
+					var explosion4 = new AnimSS(ASM.getImg("img/explosions/EXPLOSION2.png"),"b", GEObj.p2tank.x + GEObj.p2tank.sprite.width/2,GEObj.p2tank.y + GEObj.p2tank.sprite.height,0.5,20,75,false);
+					GEObj.explosions.push(explosion4);
+				}
 		}
 	}
 	for(var i = 0; i < city.cityEnt.length; i++) {

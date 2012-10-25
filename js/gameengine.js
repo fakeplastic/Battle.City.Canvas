@@ -99,26 +99,26 @@ GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 38) {
       console.log("up pressed");
       GEObj.p1tank.direction = "up";
-      GEObj.p1tank.moving = 1;
+      GEObj.p1tank.moving = true;
     }
     if(e.keyCode == 40) {
     	console.log("down pressed");
     	GEObj.p1tank.direction = "down";
-    	GEObj.p1tank.moving = 1;
+    	GEObj.p1tank.moving = true;
     }
     if(e.keyCode == 39) {
     	console.log("right pressed");
     	GEObj.p1tank.direction = "right";
-    	GEObj.p1tank.moving = 1;
+    	GEObj.p1tank.moving = true;
     }
     if(e.keyCode == 37) {
     	console.log("left pressed");
     	GEObj.p1tank.direction = "left";
-    	GEObj.p1tank.moving = 1;
+    	GEObj.p1tank.moving = true;
 	}
 	if(e.keyCode == 32) {
       console.log("fire");
-      if((Date.now() - GEObj.p1tank.lastFired) > 300) {
+      if(((Date.now() - GEObj.p1tank.lastFired) > 300) && !GEObj.p1tank.isDestroyed) {
       	var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel,  GEObj.p1tank.player);
       	GEObj.pbullets.push(bullet);
       	GEObj.p1tank.lastFired = Date.now();
@@ -127,26 +127,26 @@ GameEngine.prototype.fkeydown = function(e) {
     if(e.keyCode == 87) {
       console.log("p2 up pressed");
       GEObj.p2tank.direction = "up";
-      GEObj.p2tank.moving = 1;
+      GEObj.p2tank.moving = true;
     }
     if(e.keyCode == 90) {
     	console.log("p2 down pressed");
     	GEObj.p2tank.direction = "down";
-    	GEObj.p2tank.moving = 1;
+    	GEObj.p2tank.moving = true;
     }
     if(e.keyCode == 83) {
     	console.log("p2 right pressed");
     	GEObj.p2tank.direction = "right";
-    	GEObj.p2tank.moving = 1;
+    	GEObj.p2tank.moving = true;
     }
     if(e.keyCode == 65) {
     	console.log("p2 left pressed");
     	GEObj.p2tank.direction = "left";
-    	GEObj.p2tank.moving = 1;
+    	GEObj.p2tank.moving = true;
 	}
 	if(e.keyCode == 67) {
       console.log("p2 fire");
-      if((Date.now() - GEObj.p2tank.lastFired) > 300) {
+      if(((Date.now() - GEObj.p2tank.lastFired) > 300) && !GEObj.p2tank.isDestroyed) {
       	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel, GEObj.p2tank.player);
       	GEObj.pbullets.push(bullet);
       	GEObj.p2tank.lastFired = Date.now();
@@ -179,30 +179,30 @@ GameEngine.prototype.draw = function () {
 	for(var i = 0; i < this.explosions.length; i++) {
 		this.explosions[i].drawFrame(this.ctx);
 	}
+
+	this.ctx.fillStyle = "rgba(20, 20, 200, 0.25)";
+	this.ctx.fillRect();
 }
 
 
 GameEngine.prototype.update = function (){
-	if(GEObj.p1tank.moving) {GEObj.p1tank.move();}
-	GEObj.p1tank.setSprite();
-	if(GEObj.p2tank.moving) {GEObj.p2tank.move();}
-	GEObj.p2tank.setSprite();
+	GEObj.p1tank.update();
+	GEObj.p2tank.update();
 	for(var i = 0; i < this.pbullets.length; i++) {
 		this.pbullets[i].move();
 		this.pbullets[i].update
-	}
+	};
 	for(var i = this.pbullets.length-1; i >= 0; i-- ) {
 		if(this.pbullets[i].isRemoved) {
 			this.pbullets.splice(i,1);
 		}
-	}
+	};
 	for(var i = this.explosions.length-1; i >= 0; i-- ) {
 		if(this.explosions[i].isRemoved) {
 			this.explosions.splice(i,1);
 		}
-	}
-	GEObj.p1tank.update()
-	GEObj.p2tank.update()
+	};
+
 	city.update();
 	}
 
@@ -239,6 +239,7 @@ var city = new City();
 var ASM = new AssetMan();
 ASM.AddQueue("img/explosions/MISC_EXPLOSION.png")
 ASM.AddQueue("img/explosions/EXPLOSION.png")
+ASM.AddQueue("img/explosions/EXPLOSION2.png")
 
 ASM.dnLoad(function() {
 GEObj.init(ctx);
