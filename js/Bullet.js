@@ -1,7 +1,7 @@
 /**
  * @author Cory
  */
-var Bullet = function(x, y, direction, size, vel, player) {
+var Bullet = function(x, y, direction, size, vel, dam, player) {
 	this.x = x;
 	this.ox = x;
 	this.xt = x-1;
@@ -13,7 +13,7 @@ var Bullet = function(x, y, direction, size, vel, player) {
 	this.isRemoved = false;
 	this.size = size;
 	this.range = 100;
-	this.damage = 25;
+	this.damage = dam;
 	this.player = player
 	this.bbox = [];
 }

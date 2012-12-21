@@ -11,6 +11,7 @@ var Tank = function(x, y, player) {
 	this.life = 100;
 	this.player = player;
 	this.tanktype = 1;
+	this.bulletdam = 12.5;
 	this.bulletsize = 1.5;
 	this.bulletvel = 1.5;
 	this.defense = 1.0;

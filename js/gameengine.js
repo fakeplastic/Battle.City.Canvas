@@ -119,7 +119,7 @@ GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 32) {
       console.log("fire");
       if(((Date.now() - GEObj.p1tank.lastFired) > 300) && !GEObj.p1tank.isDestroyed) {
-      	var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel,  GEObj.p1tank.player);
+      	var bullet = new Bullet(GEObj.p1tank.x,GEObj.p1tank.y,GEObj.p1tank.direction, GEObj.p1tank.bulletsize,GEObj.p1tank.bulletvel, GEObj.p1tank.bulletdam, GEObj.p1tank.player);
       	GEObj.pbullets.push(bullet);
       	GEObj.p1tank.lastFired = Date.now();
       	}
@@ -147,7 +147,7 @@ GameEngine.prototype.fkeydown = function(e) {
 	if(e.keyCode == 67) {
       console.log("p2 fire");
       if(((Date.now() - GEObj.p2tank.lastFired) > 300) && !GEObj.p2tank.isDestroyed) {
-      	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel, GEObj.p2tank.player);
+      	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel, GEObj.p1tank.bulletdam, GEObj.p2tank.player);
       	GEObj.pbullets.push(bullet);
       	GEObj.p2tank.lastFired = Date.now();
       	}
