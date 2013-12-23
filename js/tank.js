@@ -94,11 +94,6 @@ Tank.prototype.update = function() {
 			}
 		};
 	this.setSprite();
-
-
-
-
-	
-
 }
+
 
