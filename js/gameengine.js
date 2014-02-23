@@ -169,8 +169,6 @@ GameEngine.prototype.draw = function () {
 	this.ctx.drawImage(this.p1eagle.sprite,this.p1eagle.x,this.p1eagle.y);
 	this.ctx.drawImage(this.p2eagle.sprite,this.p2eagle.x,this.p2eagle.y);
 	this.ctx.drawImage(this.p1tank.sprite,this.p1tank.x-this.p1tank.sprite.width/2,this.p1tank.y-this.p1tank.sprite.height/2);
-	
-	this.ctx.fillRect
 	this.ctx.drawImage(this.p2tank.sprite,this.p2tank.x-this.p2tank.sprite.width/2,this.p2tank.y-this.p2tank.sprite.height/2);
 	for(var i = 0; i < this.pbullets.length; i++) {
 		this.ctx.fillStyle = "rgba(200, 45, 21, 0.5)";
@@ -181,9 +179,6 @@ GameEngine.prototype.draw = function () {
 	for(var i = 0; i < this.explosions.length; i++) {
 		this.explosions[i].drawFrame(this.ctx);
 	}
-
-	this.ctx.fillStyle = "rgba(20, 20, 200, 0.25)";
-	this.ctx.fillRect();
 }
 
 
