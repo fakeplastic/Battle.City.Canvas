@@ -162,7 +162,7 @@ GameEngine.prototype.fkeyup = function(e) {
 
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0,0,this.surfaceWidth,this.surfaceHeight);
-	this.ctx.drawImage(city.BG,0,0);
+	/*this.ctx.drawImage(city.BG,0,0);*/
 	for(var i = 0; i < city.cityEnt.length; i++) {
 		this.ctx.drawImage(city.cityEnt[i].sprite,city.cityEnt[i].x,city.cityEnt[i].y);
   		};
