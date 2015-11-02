@@ -237,7 +237,24 @@ var ASM = new AssetMan();
 ASM.AddQueue("img/explosions/MISC_EXPLOSION.png")
 ASM.AddQueue("img/explosions/EXPLOSION.png")
 ASM.AddQueue("img/explosions/EXPLOSION2.png")
-
+ASM.AddQueue("img/tank1/tank1-t1-spritesheet.png")
+ASM.AddQueue("img/tank1/tank2-t1-spritesheet.png")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Da.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Db.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Ua.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Ub.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_La.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Lb.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Ra.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P1T1_Rb.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Da.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Db.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Ua.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Ub.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_La.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Lb.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Ra.gif")
+ASM.AddQueue("img/tank1/NES_Battle_Citty_P2T1_Rb.gif")
 ASM.dnLoad(function() {
 GEObj.init(ctx);
 GEObj.start();
