@@ -129,12 +129,12 @@ GameEngine.prototype.fkeydown = function(e) {
       GEObj.p2tank.direction = "up";
       GEObj.p2tank.moving = true;
     }
-    if(e.keyCode == 90) {
+    if(e.keyCode == 83) {
     	console.log("p2 down pressed");
     	GEObj.p2tank.direction = "down";
     	GEObj.p2tank.moving = true;
     }
-    if(e.keyCode == 83) {
+    if(e.keyCode == 68) {
     	console.log("p2 right pressed");
     	GEObj.p2tank.direction = "right";
     	GEObj.p2tank.moving = true;
@@ -144,7 +144,7 @@ GameEngine.prototype.fkeydown = function(e) {
     	GEObj.p2tank.direction = "left";
     	GEObj.p2tank.moving = true;
 	}
-	if(e.keyCode == 67) {
+	if(e.keyCode == 86) {
       console.log("p2 fire");
       if(((Date.now() - GEObj.p2tank.lastFired) > 300) && !GEObj.p2tank.isDestroyed) {
       	var bullet = new Bullet(GEObj.p2tank.x,GEObj.p2tank.y,GEObj.p2tank.direction, GEObj.p2tank.bulletsize,GEObj.p2tank.bulletvel, GEObj.p1tank.bulletdam, GEObj.p2tank.player);
