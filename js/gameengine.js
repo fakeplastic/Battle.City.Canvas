@@ -156,7 +156,7 @@ GameEngine.prototype.fkeydown = function(e) {
 GameEngine.prototype.fkeyup = function(e) {
 	if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 37) {
 		GEObj.p1tank.moving = 0;}
-	if(e.keyCode == 87 || e.keyCode == 90 || e.keyCode == 83 || e.keyCode == 65) {
+	if(e.keyCode == 87 || e.keyCode == 83 || e.keyCode == 68 || e.keyCode == 86) {
 		GEObj.p2tank.moving = 0;}   
 	}
 
